@@ -19,6 +19,10 @@ export class RegisterPage implements OnInit {
 
     try {
       const user = await this.authService.register(email.value, password.value);
+
+      if (user) {
+        this.authService.userRedirect(user);
+      }
     } catch (error) {
       console.log(error);
     }

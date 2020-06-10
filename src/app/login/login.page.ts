@@ -20,6 +20,10 @@ export class LoginPage implements OnInit {
 
     try {
       const user = await this.authService.login(email.value, password.value);
+
+      if (user) {
+        this.authService.userRedirect(user);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -27,11 +31,16 @@ export class LoginPage implements OnInit {
     this.loaderService.hideLoader();
   } 
 
-  async onLoginGoogle(email, password) {
+  async onLoginGoogle() {
     this.loaderService.showLoader();
 
     try {
       const user = await this.authService.loginWithGoogle();
+      console.log(user);
+      
+      if (user) {
+        this.authService.userRedirect(user);
+      }
     } catch (error) {
       console.log(error);
     }
