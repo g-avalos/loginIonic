@@ -1,20 +1,68 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="end">
+      <ion-menu-button auto-hide="false">
+        
+      </ion-menu-button>
+    </ion-buttons>
     <ion-title>
-      Blank
+      IFTS 11
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <div class="row">
+    <div class="" *ngIf="_notasDni?.children.length > 0">
+      <H2 class="text-center">{{_notasDni?.DNI}} - {{_notasDni?.children[0].Nombre}}</H2>
+      <div class="col-md-12 mx-auto mt-12">
+        <div class="content">
+          <div fxLayout="row wrap" fxLayoutGap="16px grid">
+            <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let nota of _notasDni.children">
+              <ion-card>
+                <ion-card-header>
+                  <ion-card-title>{{nota.Materia}}</ion-card-title>
+                </ion-card-header>
+              
+                <ion-card-content>
+                  <h6 class="">Estado: {{nota.Condicion}}</h6>
+                  <h6 class="">Fecha cursada: {{nota.Fecha_Cursada}}</h6>
+                  <h6 class="">Nota cursada: {{nota.Nota_Cursada}}</h6>
+                  <h6 class="" *ngIf="nota.Fecha_Final">Nota final: {{nota.Nota_Final}}</h6>
+                  <h6 class="" *ngIf="nota.Fecha_Final">Fecha final: {{nota.Fecha_Final}}</h6>
+                </ion-card-content>
+              </ion-card>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="" *ngIf="_notas?.length > 0">
+      <div *ngFor="let alumno of _notas">
+        <H2 class="text-center">{{alumno?.DNI}} - {{alumno?.children[0].Nombre}}</H2>
+        <div class="col-md-12 mx-auto mt-12">
+          <div class="content">
+            <div fxLayout="row wrap" fxLayoutGap="16px grid">
+              <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let nota of alumno.children">
+                <ion-card>
+                  <ion-card-header>
+                    <ion-card-title>{{nota.Materia}}</ion-card-title>
+                  </ion-card-header>
+                
+                  <ion-card-content>
+                    <h6 class="">Estado: {{nota.Condicion}}</h6>
+                    <h6 class="">Fecha cursada: {{nota.Fecha_Cursada}}</h6>
+                    <h6 class="">Nota cursada: {{nota.Nota_Cursada}}</h6>
+                    <h6 class="" *ngIf="nota.Fecha_Final">Nota final: {{nota.Nota_Final}}</h6>
+                    <h6 class="" *ngIf="nota.Fecha_Final">Fecha final: {{nota.Fecha_Final}}</h6>
+                  </ion-card-content>
+                </ion-card>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </ion-content>

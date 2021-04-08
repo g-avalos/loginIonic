@@ -10,12 +10,15 @@
       <ion-input placeholder="Email" #email></ion-input>
     </ion-item>
     <ion-item>
+      <ion-input placeholder="DNI" #dni></ion-input>
+    </ion-item>
+    <ion-item>
       <ion-input placeholder="Password" type="password" #password></ion-input>
     </ion-item>
 
     <ion-row>
       <ion-col>
-        <ion-button (click)="onRegister(email, password)" expand="block">Registrar</ion-button>
+        <ion-button (click)="onRegister(email, dni, password)" expand="block">Registrar</ion-button>
       </ion-col>
     </ion-row>
 

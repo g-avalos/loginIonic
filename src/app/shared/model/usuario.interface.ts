@@ -3,9 +3,10 @@ export type Role = 'ADMIN' | 'ALUMNO' | 'DOCENTE';
 export interface Usuario {
   uid: string;
   email: string;
-  nombre?: string;
-  emailVerificado: boolean;
+  displayName?: string;
+  emailVerified: boolean;
   password?: string;
-  foto?: string;
+  dni?: number;
+  photoURL?: string;
   rol?: Role;
 }

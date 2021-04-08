@@ -30,20 +30,30 @@ export class AuthService  {
         password
       );
 
-      await this.updateUsuario(result.user);
-
       return result.user;
     } catch (error) {
       console.log("Error -> ", error);
     }
   }
 
-  async register(email: string, password: string): Promise<User> {
+  async register(email: string, dni:number, password: string): Promise<User> {
     try {
       const result = await this.afAuth.createUserWithEmailAndPassword(
         email,
         password
       );
+
+      const datos: Usuario = {
+        uid: result.user.uid,
+        email: result.user.email,
+        emailVerified: result.user.emailVerified,
+        photoURL: result.user.photoURL,
+        displayName: result.user.displayName,
+        dni: dni,
+        rol: 'ALUMNO'
+      };
+
+      this.updateUsuario(datos);
 
       this.enviarMailVerificacion();
 
@@ -97,7 +107,7 @@ export class AuthService  {
     }
   }
 
-  private async updateUsuario(usuario: User) {
+  private async updateUsuario(usuario: Usuario) {
     console.log(usuario.uid);
 
     const usuarioRef : AngularFirestoreDocument<Usuario> = this.afs.doc<Usuario>(`usuarios/${usuario.uid}`);
@@ -114,9 +124,10 @@ export class AuthService  {
     const datos: Usuario = {
       uid: usuario.uid,
       email: usuario.email,
-      emailVerificado: usuario.emailVerified,
-      foto: usuario.photoURL,
-      nombre: usuario.displayName,
+      emailVerified: usuario.emailVerified,
+      photoURL: usuario.photoURL,
+      dni: usuario.dni,
+      displayName: usuario.displayName,
       rol: userRol
     };
 

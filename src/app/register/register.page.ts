@@ -14,11 +14,11 @@ export class RegisterPage implements OnInit {
   ngOnInit() {
   }
 
-  async onRegister(email, password) {
+  async onRegister(email, dni, password) {
     this.loaderService.showLoader();
 
     try {
-      const user = await this.authService.register(email.value, password.value);
+      const user = await this.authService.register(email.value, dni.value, password.value);
 
       if (user) {
         this.authService.userRedirect(user);
